@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RetailVivo</title>
+    <style>
+        body {
+            font-family: Poppins, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #212A47;
+            background-color: #FFFFFF;
+        }
+
+        /* Top Bar Section */
+        .top-bar {
+            background-color: #FFFFFF;
+            color: #212A47;
+            text-align: right;
+            padding: 10px 40px;
+            font-size: 1em;
+            border-bottom: 1px solid #E0E0E0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .top-bar a {
+            margin-left: 10px;
+            text-decoration: none;
+        }
+
+        .top-bar .phone,
+        .top-bar .email {
+            color: #8AC4B8;
+        }
+
+        /* Header Section */
+        header {
+            background-color: #FFFFFF;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 40px; /* To appear under the top-bar */
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+
+        header img {
+            height: 50px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: #212A47;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: normal;
+            position: relative;
+        }
+
+        .cta-button {
+            background-color: #FFFFFF;
+            color: #8AC4B8;
+            border: 1px solid #8AC4B8;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .language-selector {
+            position: relative;
+            display: inline-block;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .language-selector img {
+            width: 30px;
+            height: auto;
+        }
+
+        .language-selector .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #FFFFFF;
+            min-width: 50px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .language-selector .dropdown-content a {
+            color: black;
+            padding: 8px 10px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .language-selector .dropdown-content a img {
+            width: 30px;
+            height: auto;
+        }
+
+        .language-selector .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .language-selector:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Hero Section with Interactive Features */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 100px 40px;
+            background-color: #F8F8F8;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-text {
+            max-width: 50%;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            color: #212A47;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Typing effect for dynamic phrase */
+        .hero h1 {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 4px solid #8AC4B8;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #8AC4B8; }
+        }
+
+        .hero-video {
+            max-width: 35%; /* Smaller video size */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Slogan Section */
+        .slogan-section {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .slogan-section h2 {
+            font-size: 2em;
+            color: #212A47;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0;
+        }
+
+        #dynamic-slogan {
+            opacity: 0;
+            transform: translateY(-20px); /* Ξεκινά από πάνω */
+            animation: unfold 1s ease-out forwards;
+            animation-delay: 0.5s; /* Μικρή καθυστέρηση πριν ξεκινήσει το εφέ */
+        }
+
+        @keyframes unfold {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px); /* Ξεκινά από πάνω */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); /* Εμφανίζεται στη θέση του */
+            }
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 50px 40px;
+            background-color: #F8F8F8;
+            text-align: center;
+        }
+
+        .features-section h2 {
+            font-size: 2em;
+            color: #212A47;
+            margin-bottom: 30px;
+        }
+
+        .features-container {
+            display: flex;
+            justify-content: space-around;
+            text-align: left;
+            gap: 50px;
+        }
+
+        .feature-item {
+            background-color: #FFFFFF; 
+            padding: 20px;
+            border-radius: 10px;
+            width: auto; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            max-width: 200px;
+            transition: transform 0.3s, background-color 0.3s;
+            text-align: center;
+        }
+
+        .feature-item:hover {
+            transform: scale(1.05);
+            background-color: #D9ECE8;
+        }
+
+        .feature-item img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.2em;
+            color: #212A47;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        .feature-item p {
+            font-size: 1em;
+            color: #464E63;
+        }
+
+        /* Experiences Section */
+        .experiences-section {
+            padding: 50px 40px;
+            background-color: #FFFFFF;
+            text-align: left;
+        }
+
+        .experiences-section h2 {
+            font-size: 2em;
+            color: #212A47;
+            margin-bottom: 30px;
+        }
+
+        .experiences-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .experience-item {
+            font-size: 1.2em;
+            color: #464E63;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .experience-item:before {
+            content: "•";
+            color: #8AC4B8;
+            font-size: 2em;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Industries Section with Carousel */
+        .industries-section {
+            padding: 50px 20px;
+            background-color: #FFFFFF;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .industries-section h2 {
+            color: #212A47;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .industries-section p {
+            font-size: 1.2em;
+            color: #464E63;
+            margin-bottom: 40px;
+        }
+
+        .industries-carousel {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .industry-item {
+            background-color: #F8F8F8;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            flex: 0 0 300px;
+            transition: transform 0.3s;
+        }
+
+        .industry-item:hover {
+            transform: scale(1.05);
+        }
+
+        .industry-item h3 {
+            color: #212A47;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .industry-item p {
+            color: #464E63;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        /* Case Studies Section */
+        .case-studies-section {
+            padding: 50px 20px;
+            background-color: #F8F8F8;
+            text-align: center;
+        }
+
+        .case-studies-section h2 {
+            font-size: 2em;
+            color: #212A47;
+            margin-bottom: 40px;
+        }
+
+        .case-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .case-study-item {
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .case-study-item:hover {
+            transform: scale(1.05);
+        }
+
+        .case-study-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .case-study-item h3 {
+            font-size: 1.5em;
+            color: #212A47;
+            margin-bottom: 10px;
+        }
+
+        .case-study-item p {
+            font-size: 1em;
+            color: #464E63;
+        }
+
+        /* Trusted By Section */
+        .trusted-by-section {
+            padding: 50px 20px;
+            background-color: #FFFFFF;
+            text-align: center;
+        }
+
+        .trusted-by-section h2 {
+            font-size: 2em;
+            color: #212A47;
+            margin-bottom: 40px;
+        }
+
+        .trusted-by-logos {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .trusted-by-logos img {
+            width: 150px;
+            height: auto;
+        }
+
+        /* About Us Section */
+        .about-us-section {
+            padding: 50px 40px;
+            background-color: #FFFFFF;
+            text-align: left;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .about-us-section h2 {
+            text-align: center;
+            color: #212A47;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .about-us-section h3 {
+            color: #212A47;
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+
+        .about-us-section p {
+            color: #464E63;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 50px 20px;
+            background-color: #F8F8F8;
+            text-align: center;
+        }
+
+        .pricing-section h2 {
+            color: #212A47;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .pricing-section .availability {
+            font-size: 1.2em;
+            color: #464E63;
+            margin-bottom: 40px;
+        }
+
+        .pricing-bundles {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .bundle {
+            background-color: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 10px;
+            padding: 20px;
+            width: 30%;
+            min-width: 250px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .bundle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .bundle h3 {
+            color: #212A47;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .bundle p {
+            color: #464E63;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .bundle-status {
+            font-size: 1.2em;
+            color: #8AC4B8;
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 50px 20px;
+            background-color: #FFFFFF;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            flex: 1;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info img {
+            width: 100px; /* Smaller image size */
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5em;
+            color: #212A47;
+            margin-bottom: 10px;
+        }
+
+        .contact-info p {
+            font-size: 1em;
+            color: #464E63;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info p img {
+            width: 20px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .contact-form {
+            flex: 2;
+            max-width: 600px;
+        }
+
+        .contact-form h2 {
+            font-size: 2em;
+            color: #212A47;
+            margin-bottom: 20px;
+        }
+
+        .contact-form p {
+            font-size: 1.2em;
+            color: #464E63;
+            margin-bottom: 20px;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 10px;
+            border: 1px solid #E0E0E0;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .contact-form button {
+            padding: 15px;
+            background-color: #8AC4B8;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #74AFA0;
+        }
+
+        footer {
+            background-color: #F8F8F8;
+            color: #212A47;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #E0E0E0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar Section -->
+    <div class="top-bar">
+        <a href="tel:+1234567890" class="phone">+1 234 567 890</a> | <a href="mailto:info@retailvivo.com" class="email">info@retailvivo.com</a>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <a href="#home"><img src="rvlogo.png" alt="rvlogo.png"></a>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#industries">Industries</a>
+            <a href="#about-us">About Us</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+            <a href="#login">Log in</a>
+            <a href="#book-demo" class="cta-button">Start a Trial for Free</a>
+            <div class="language-selector">
+                <img src="globeicon.png" alt="globeicon.png">
+                <div class="dropdown-content">
+                    <a href="#"><img src="englishflag.png" alt="englishflag.png"></a>
+                    <a href="#"><img src="greekflag.png" alt="greekflag.png"></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Interactive Features -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1 id="dynamic-phrase">Empower Your Brand</h1>
+            <p>Everyone loves to engage. We make it perfect for consumers of all ages.</p>
+        </div>
+        <video class="hero-video" autoplay muted loop>
+            <source src="hero-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
+
+    <!-- Slogan Section -->
+    <section class="slogan-section">
+        <h2>The best experience</h2>
+        <h2 id="dynamic-slogan">for the best value</h2>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <h2>Features</h2>
+        <div class="features-container">
+            <div class="feature-item">
+                <img src="polls-icon.png" alt="polls-icon.png">
+                <h3>Polls</h3>
+                <p>Create engaging polls to understand your audience better. Polls are an excellent way to gather feedback and insights, helping you tailor your offerings to meet the needs and preferences of your customers.</p>
+            </div>
+            <div class="feature-item">
+                <img src="luckyspin-icon.png" alt="luckyspin-icon.png">
+                <h3>Lucky Spin</h3>
+                <p>Increase engagement with a fun and rewarding lucky spin feature. This interactive tool keeps your audience excited and coming back for more, as they spin for a chance to win exclusive prizes.</p>
+            </div>
+            <div class="feature-item">
+                <img src="scratch-icon.png" alt="scratch-icon.png">
+                <h3>Scratch</h3>
+                <p> Let your customers uncover digital surprises with a simple swipe or click. Our scratch-off feature turns every interaction into a moment of excitement, keeping users engaged and eager to come back for more.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section class="experiences-section" id="experiences">
+        <h2>Experiences</h2>
+        <div class="experiences-container">
+            <div class="experience-item">
+                <p>Boost customer satisfaction with intuitive, easy-to-use tools that simplify the engagement process. RetailVivo ensures that every interaction is smooth and enjoyable, creating a positive experience that keeps customers coming back.</p>
+            </div>
+            <div class="experience-item">
+                <p>Elevate your brand by offering personalized experiences tailored to individual customer preferences. RetailVivo’s advanced targeting capabilities allow you to connect with your audience on a deeper level, fostering loyalty and driving conversions.</p>
+            </div>
+            <div class="experience-item">
+                <p>Strengthen your brand’s connection with customers through interactive features that encourage repeat engagement. RetailVivo helps you build lasting relationships by making your brand a part of your customers' daily lives.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section with Carousel -->
+    <section id="industries" class="industries-section">
+        <h2>Industries</h2>
+        <p>Our application is designed to enhance customer engagement and drive sales through personalized and interactive experiences. While its capabilities are not limited to specific industries, here are some examples of sectors that can benefit from its use:</p>
+        <div class="industries-carousel">
+            <div class="industry-item">
+                <h3>Fashion Retail</h3>
+                <p>Engage shoppers with interactive style quizzes and instant-win games. Boost loyalty by creating personalized shopping experiences.</p>
+            </div>
+            <div class="industry-item">
+                <h3>Grocery Retail</h3>
+                <p>Use gamified promotions to encourage repeat purchases. Engage customers with interactive polls to drive sales and loyalty.</p>
+            </div>
+            <div class="industry-item">
+                <h3>Beauty & Personal Care</h3>
+                <p>Create interactive experiences like virtual try-ons and beauty quizzes. Increase engagement with exclusive gamified campaigns.</p>
+            </div>
+            <div class="industry-item">
+                <h3>Electronics Retail</h3>
+                <p>Enhance shopping with interactive guides and comparison tools. Use quizzes to improve product recommendations and boost sales.</p>
+            </div>
+            <div class="industry-item">
+                <h3>Home & Furniture</h3>
+                <p>Engage customers with room design tools and style quizzes. Strengthen loyalty with gamified rewards for surveys and polls.</p>
+            </div>
+            <div class="industry-item">
+                <h3>Pharmacy & Health Retail</h3>
+                <p>Educate customers with health quizzes and product recommendations. Use loyalty programs to encourage repeat visits.</p>
+            </div>
+            <div class="industry-item">
+                <h3>Pet Supplies Retail</h3>
+                <p>Engage pet owners with quizzes and personalized suggestions. Offer gamified loyalty programs to encourage repeat purchases.</p>
+            </div>
+            <div class="industry-item">
+                <h3>Bookstores</h3>
+                <p>Enhance engagement with reading quizzes and polls. Reward frequent shoppers with gamified promotions.</p>
+            </div>
+            <div class="industry-item">
+                <h3>Toy Stores</h3>
+                <p>Engage families with interactive games and quizzes. Drive sales with fun, gamified promotions and rewards.</p>
+            </div>
+            <div class="industry-item">
+                <h3>Home Improvement & DIY</h3>
+                <p>Help customers find tools with project guides and quizzes. Use gamified incentives for DIY challenges.</p>
+            </div>
+            <div class="industry-item">
+                <h3>Wine & Spirits Retail</h3>
+                <p>Engage customers with tasting quizzes and polls. Reward loyal customers with gamified promotions.</p>
+            </div>
+            <div class="industry-item">
+                <h3>Online Marketplaces</h3>
+                <p>Enhance shopping with interactive tools and quizzes. Tailor the journey with insights on customer preferences.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="case-studies-section">
+        <h2>Case Studies</h2>
+        <div class="case-studies-grid">
+            <div class="case-study-item">
+                <img src="cosmetics-campaign.png" alt="cosmetics-campaign.png">
+                <h3>Cosmetics</h3>
+                <p>RetailVivo successfully enhanced consumer trust and engagement for leading cosmetics brands like Maybelline. Through personalized quizzes and interactive experiences, we effectively drove customer loyalty and brand awareness.</p>
+            </div>
+            <div class="case-study-item">
+                <img src="supermarket-campaign.png" alt="supermarket-campaign.png">
+                <h3>Supermarket</h3>
+                <p>We delivered impactful promotional campaigns for top supermarket chains, incorporating gamified offers and interactive solutions that significantly increased customer retention and sales frequency.</p>
+            </div>
+            <div class="case-study-item">
+                <img src="cigarettes-campaign.png" alt="cigarettes-campaign.png">
+                <h3>Cigarettes</h3>
+                <p>RetailVivo redefined consumer engagement for premium cigarette brands, utilizing interactive campaigns that not only enhanced customer loyalty but also reinforced brand perception and market presence.</p>
+            </div>
+            <div class="case-study-item">
+                <img src="brewing-campaign.png" alt="brewing-campaign.png">
+                <h3>Brewing</h3>
+                <p>Partnering with industry leaders like Athenian Brewery, RetailVivo crafted interactive campaigns that elevated brand visibility and consumer engagement, driving substantial growth in both brand loyalty and sales.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="trusted-by-section">
+        <h2>Trusted By</h2>
+        <div class="trusted-by-logos">
+            <img src="maybellinelogo.png" alt="maybellinelogo.png">
+            <img src="bmwlogo.png" alt="bmwlogo.png">
+            <img src="garnierlogo.png" alt="garnierlogo.png">
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about-us" class="about-us-section">
+        <h2>About Us</h2>
+        <p>At RetailVivo, we believe in the power of interaction to transform brands and engage audiences. Our passion lies in creating innovative and gamified digital experiences that not only captivate but also convert. We specialize in designing unique promotional tools, such as interactive scratch cards and other gamified marketing solutions, tailored to enhance brand loyalty and drive sales.</p>
+        
+        <h3>Our Vision</h3>
+        <p>To revolutionize the way brands connect with their audiences by blending the art of play with the science of marketing. We envision a world where every brand has the tools to create meaningful, memorable, and interactive experiences that resonate deeply with their customers.</p>
+        
+        <h3>Our Mission</h3>
+        <p>Our mission is to empower businesses to engage their audiences in fun and interactive ways, driving meaningful connections and fostering long-term loyalty. We are dedicated to providing cutting-edge gamified marketing solutions that not only increase sales but also elevate the overall brand experience.</p>
+        
+        <h3>What We Do</h3>
+        <p>We work with leading brands, such as Garnier and others, to craft custom digital campaigns that excite and engage. Through our innovative online applications, we help companies build brand awareness, create loyalty, and boost engagement with interactive tools like polls, games, and more. Our solutions are designed to captivate audiences, foster deeper connections, and ultimately drive growth.</p>
+        
+        <h3>Why Choose Us?</h3>
+        <p>At RetailVivo, we are more than just a marketing agency—we are your partners in creating engaging, interactive, and impactful digital experiences. Together, we can build a stronger, more connected brand.</p>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <h2>Pricing</h2>
+        <p class="availability">Choose the plan that suits your business needs.</p>
+        <div class="pricing-bundles">
+            <!-- Starter Plan -->
+            <div class="bundle">
+                <h3>Starter Plan</h3>
+                <p>Free Plan</p>
+                <p class="bundle-status">Up to 100 replies/month</p>
+            </div>
+            
+            <!-- Professional Plan -->
+            <div class="bundle">
+                <h3>Professional Plan</h3>
+                <p>€1,900/year</p>
+                <p class="bundle-status">Up to 2,000 replies/month</p>
+            </div>
+            
+            <!-- Business Plan -->
+            <div class="bundle">
+                <h3>Business Plan</h3>
+                <p>€3,900/year</p>
+                <p class="bundle-status">Up to 10,000 replies/month</p>
+            </div>
+            
+            <!-- Enterprise Plan -->
+            <div class="bundle">
+                <h3>Enterprise Plan</h3>
+                <p>Call us for pricing</p>
+                <p class="bundle-status">Unlimited replies/month</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-info">
+            <img src="contactusretailvivo.png" alt="contactusretailvivo.png"> 
+            <h3>Online Services</h3>
+            <p><img src="mail.png" alt="mail.png"> info@retailvivo.com</p>
+            <h3>Online Contact</h3>
+            <p><img src="telephone.png" alt="telephone.png"> +1 234 567 890</p>
+            <p><img src="telephone.png" alt="telephone.png"> +44 123 456 7890</p>
+            <h3>Office Address</h3>
+            <p><img src="location.png" alt="location.png"> 123 Main Street, Leicester, LE1 1AB, United Kingdom</p>
+        </div>
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <p>Let's get in touch!</p>
+            <form>
+                <input type="text" name="first-name" placeholder="First Name" required>
+                <input type="text" name="last-name" placeholder="Last Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="text" name="subject" placeholder="Subject" required>
+                <textarea name="message" placeholder="Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 RetailVivo. All rights reserved.</p>
+        <p><a href="#">Terms</a> | <a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a></p>
+    </footer>
+
+    <!-- JavaScript for Dynamic Phrase -->
+    <script>
+        const phrases = [
+            "Engage Your Audience",
+            "Drive Brand Loyalty",
+            "Boost Your Sales",
+            "Transform Customer Experience",
+            "Empower Your Brand"
+        ];
+        let index = 0;
+
+        function changePhrase() {
+            document.getElementById("dynamic-phrase").innerText = phrases[index];
+            index = (index + 1) % phrases.length;
+        }
+
+        setInterval(changePhrase, 3000); // Αλλάζει τη φράση κάθε 3 δευτερόλεπτα
+        window.onload = changePhrase; // Ξεκινάει την αλλαγή φράσεων κατά το φόρτωμα της σελίδας
+    </script>
+</body>
+</html>
